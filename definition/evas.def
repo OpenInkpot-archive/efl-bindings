@@ -1,0 +1,8 @@
+<bind>
+    <include file="Evas.h"/>
+    <typemap type="evas_object" ext="Evas_Object *"/>
+    <define name="evas_object_add">
+        <in type="evas" ext="Evas *"/>
+        <return type="evas_object"/>
+    </define>
+</bind>
