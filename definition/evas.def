@@ -1,8 +1,58 @@
 <bind>
     <include file="Evas.h"/>
-    <typemap type="evas_object" ext="Evas_Object *"/>
-    <define name="evas_object_add">
-        <in type="evas" ext="Evas *"/>
+    <typemap type="evas_object"/>
+    <typemap type="evas"/>
+    
+    <!-- костыль, чтобы не биндить всякие ecore_evas и прочее
+         потом когда нибудь сделаем нормально ;)
+      -->
+    <define name="esay_evas_create">
+        <return type="evas"/>
+    </define>
+
+    <define name="evas_object_rectangle_add">
+        <arg type="evas" name="evas">
         <return type="evas_object"/>
+    </define>
+    
+    <define name="evas_object_line_add">
+        <arg type="evas"/>
+        <return type="evas_object"/>
+    </define>
+
+    <define name="evas_object_line_xy_set">
+        <arg type="evas" name="evas"/>
+        <arg type="int" name="x1"/>
+        <arg type="int" name="y1"/>
+        <arg type="int" name="x2"/>
+        <arg type="int" name="y2"/>
+    </define>
+
+    <define name="evas_object_line_xy_get"
+        cname="ebinding_evas_object_line_xy_get">
+        <arg type="evas" name="evas">
+        <arg type="int" name="x1" direction="out"/>
+        <arg type="int" name="y1" direction="out"/>
+        <arg type="int" name="x2" direction="out"/>
+        <arg type="int" name="y2" direction="out"/>
+
+        <!-- target= это будет что-то типа ifdef -->
+        <return target="librep" retval="0" outs="1" type="list"/>
+        <return target="lua" retval="0" outs="1" type="table"/>
+    </define>    
+
+    <define name="evas_object_polygon_add">
+        <arg type="evas" name="evas"/>
+        <return type="evas_object"/>
+    </define>
+
+    <define name="evas_object_polygon_point_add">
+        <arg type="evas_object" name="obj"/>
+        <arg type="int" name="x"/>
+        <arg type="int" name="y"/>
+    </define>
+
+    <define name="evas_object_polygon_points_clear">
+        <arg type="evas_object" name="obj"/>
     </define>
 </bind>
